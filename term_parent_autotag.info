@@ -1,0 +1,4 @@
+name = Term parent autotag
+description = Field widget option to automatically tag term parents.
+package = custom
+core = 7.x
