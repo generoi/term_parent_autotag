@@ -25,11 +25,13 @@ function term_parent_autotag_form_field_ui_field_edit_form_alter(&$form, &$form_
  * Implements hook_entity_presave().
  */
 function term_parent_autotag_entity_presave($entity, $type) {
-  // @TODO is type property always set
-  $fields = field_info_instances($type, $entity->type);
-  foreach ($fields as $field_name => $field_info) {
-    if (!empty($field_info['term_parent_autotag'])) {
-      term_parent_autotag_tag_parents($type, $entity, $field_name);
+  // FieldCollectionItems do not have a type set.
+  if (!empty($entity->type)) {
+    $fields = field_info_instances($type, $entity->type);
+    foreach ($fields as $field_name => $field_info) {
+      if (!empty($field_info['term_parent_autotag'])) {
+        term_parent_autotag_tag_parents($type, $entity, $field_name);
+      }
     }
   }
 }
